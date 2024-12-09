@@ -29,7 +29,7 @@ const SettingsScreen = () => {
 
       {/* Notifications */}
       <View style={styles.settingRow}>
-        <Text style={styles.text}>Enable Notifications</Text>
+        <Text style={styles.text}>Enable Notifications niggas</Text>
         <Switch
           value={isNotificationsEnabled}
           onValueChange={toggleNotifications}
