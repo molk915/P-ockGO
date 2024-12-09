@@ -10,29 +10,35 @@ const SettingsScreen = () => {
   const toggleNotifications = () => setIsNotificationsEnabled(previousState => !previousState);
 
   const handleSaveSettings = () => {
-    // Tu można dodać logikę zapisywania ustawień, np. w localStorage, AsyncStorage itp.
     alert("Settings saved!");
   };
 
+  // Zmieniamy style w zależności od trybu
+  const containerStyle = isDarkMode ? styles.darkContainer : styles.lightContainer;
+  const textStyle = isDarkMode ? styles.darkText : styles.lightText;
+  const switchTrackColor = isDarkMode ? "#81b0ff" : "#f4f3f4";
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
+    <View style={[styles.container, containerStyle]}>
+      <Text style={[styles.header, textStyle]}>Settings</Text>
 
       {/* Dark Mode */}
       <View style={styles.settingRow}>
-        <Text style={styles.text}>Enable Dark Mode</Text>
+        <Text style={[styles.text, textStyle]}>Enable Dark Mode</Text>
         <Switch
           value={isDarkMode}
           onValueChange={toggleDarkMode}
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
         />
       </View>
 
       {/* Notifications */}
       <View style={styles.settingRow}>
-        <Text style={styles.text}>Enable Notifications niggas</Text>
+        <Text style={[styles.text, textStyle]}>Enable Notifications</Text>
         <Switch
           value={isNotificationsEnabled}
           onValueChange={toggleNotifications}
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
         />
       </View>
 
@@ -51,10 +57,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+  lightContainer: {
+    backgroundColor: '#fff',
+  },
+  darkContainer: {
+    backgroundColor: '#333',
+  },
   header: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  text: {
+    fontSize: 18,
+  },
+  darkText: {
+    color: '#fff',
+  },
+  lightText: {
+    color: '#333',
   },
   settingRow: {
     flexDirection: 'row',
@@ -63,9 +84,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
   },
-  text: {
-    fontSize: 18,
-  },
 });
 
 export default SettingsScreen;
+cd
