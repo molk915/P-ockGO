@@ -22,7 +22,6 @@ const SettingsScreen = () => {
     <View style={[styles.container, containerStyle]}>
       <Text style={[styles.header, textStyle]}>Settings</Text>
 
-      {/* Dark Mode */}
       <View style={styles.settingRow}>
         <Text style={[styles.text, textStyle]}>Enable Dark Mode</Text>
         <Switch
@@ -32,7 +31,7 @@ const SettingsScreen = () => {
         />
       </View>
 
-      {/* Notifications */}
+     
       <View style={styles.settingRow}>
         <Text style={[styles.text, textStyle]}>Enable Notifications</Text>
         <Switch
@@ -87,4 +86,3 @@ const styles = StyleSheet.create({
 });
 
 export default SettingsScreen;
-cd

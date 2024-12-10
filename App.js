@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import HomeScreen from "./Screens/HomeScreen"
-import SettingsScreen from "./Screens/settingsScreen"
+import HomeScreen from "./Screens/HomeScreen";
+import SettingsScreen from "./Screens/settingsScreen";
+import PlockMap from "./Screens/PlockMap";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -12,9 +13,11 @@ export default function App() {
       <View style={styles.content}>
         {activeTab === 'Home' ? (
           <HomeScreen />
-        ) : (
+        ) : activeTab === 'Settings' ? (
           <SettingsScreen />
-        )}
+        ) : activeTab === 'PlockMap' ? (
+          <PlockMap />
+        ) : null}
       </View>
 
       {/* Pasek nawigacyjny */}
@@ -30,6 +33,12 @@ export default function App() {
           onPress={() => setActiveTab('Settings')}
         >
           <Text style={styles.tabText}>Settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabButton, activeTab === 'PlockMap' && styles.activeTab]}
+          onPress={() => setActiveTab('PlockMap')}
+        >
+          <Text style={styles.tabText}>Płock Map</Text>
         </TouchableOpacity>
       </View>
     </View>
