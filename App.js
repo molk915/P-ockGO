@@ -1,78 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ThemeProvider } from "./ThemeContext";
 import HomeScreen from "./Screens/HomeScreen";
-import SettingsScreen from "./Screens/settingsScreen";
 import PlockMap from "./Screens/PlockMap";
+import SettingsScreen from "./Screens/settingsScreen";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('Home');
-
   return (
-    <View style={{ flex: 1 }}>
-      {/* Główna część aplikacji */}
-      <View style={styles.content}>
-        {activeTab === 'Home' ? (
-          <HomeScreen />
-        ) : activeTab === 'Settings' ? (
-          <SettingsScreen />
-        ) : activeTab === 'PlockMap' ? (
-          <PlockMap />
-        ) : null}
-      </View>
-
-      {/* Pasek nawigacyjny */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[styles.tabButton, activeTab === 'Home' && styles.activeTab]}
-          onPress={() => setActiveTab('Home')}
-        >
-          <Text style={styles.tabText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, activeTab === 'Settings' && styles.activeTab]}
-          onPress={() => setActiveTab('Settings')}
-        >
-          <Text style={styles.tabText}>Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, activeTab === 'PlockMap' && styles.activeTab]}
-          onPress={() => setActiveTab('PlockMap')}
-        >
-          <Text style={styles.tabText}>Płock Map</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Plock Map" component={PlockMap} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  tabBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    height: 60,
-    backgroundColor: '#f8f8f8',
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-  },
-  tabButton: {
-    padding: 10,
-  },
-  activeTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#007bff',
-  },
-  tabText: {
-    fontSize: 18,
-    color: '#333',
-  },
-});

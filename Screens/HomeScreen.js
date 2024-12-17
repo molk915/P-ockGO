@@ -1,26 +1,35 @@
-// screens/HomeScreen.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useTheme } from "../ThemeContext";
 
-const HomeScreen = () => {
+export default function HomeScreen() {
+  const { isDarkMode } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home Screen</Text>
-      <Text>tu filip ma dodac mapke czy cos</Text>
+    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+      <Text style={[styles.text, isDarkMode && styles.darkText]}>
+        Welcome to Home Screen
+      </Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  darkContainer: {
+    backgroundColor: "#333",
   },
   text: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  darkText: {
+    color: "#fff",
   },
 });
-
-export default HomeScreen;

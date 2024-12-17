@@ -1,88 +1,39 @@
-// screens/SettingsScreen.js
-import React, { useState } from 'react';
-import { View, Text, Switch, StyleSheet, Button } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { useTheme } from "../ThemeContext";
 
-const SettingsScreen = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(true);
-
-  const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
-  const toggleNotifications = () => setIsNotificationsEnabled(previousState => !previousState);
-
-  const handleSaveSettings = () => {
-    alert("Settings saved!");
-  };
-
-  // Zmieniamy style w zależności od trybu
-  const containerStyle = isDarkMode ? styles.darkContainer : styles.lightContainer;
-  const textStyle = isDarkMode ? styles.darkText : styles.lightText;
-  const switchTrackColor = isDarkMode ? "#81b0ff" : "#f4f3f4";
+export default function SettingsScreen() {
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <View style={[styles.container, containerStyle]}>
-      <Text style={[styles.header, textStyle]}>Settings</Text>
-
-      <View style={styles.settingRow}>
-        <Text style={[styles.text, textStyle]}>Enable Dark Mode</Text>
-        <Switch
-          value={isDarkMode}
-          onValueChange={toggleDarkMode}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-        />
-      </View>
-
-     
-      <View style={styles.settingRow}>
-        <Text style={[styles.text, textStyle]}>Enable Notifications</Text>
-        <Switch
-          value={isNotificationsEnabled}
-          onValueChange={toggleNotifications}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-        />
-      </View>
-
+    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+      <Text style={[styles.text, isDarkMode && styles.darkText]}>
+        Settings Screen
+      </Text>
       <Button
-        title="Save Settings"
-        onPress={handleSaveSettings}
+        title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        onPress={toggleTheme}
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  lightContainer: {
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
   darkContainer: {
-    backgroundColor: '#333',
-  },
-  header: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    backgroundColor: "#333",
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000",
   },
   darkText: {
-    color: '#fff',
-  },
-  lightText: {
-    color: '#333',
-  },
-  settingRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    marginVertical: 10,
+    color: "#fff",
   },
 });
-
-export default SettingsScreen;
